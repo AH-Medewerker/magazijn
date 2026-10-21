@@ -64,6 +64,29 @@ main{max-width:560px;margin:0 auto;padding:0 14px}
 .toast.show{display:block}
 .vracht button.bell{background:var(--blue2);color:var(--blue)}
 .lbl{display:inline-block;font-size:12px;font-weight:700;background:var(--blue2);color:var(--blue);border-radius:999px;padding:2px 8px;margin-top:4px}
+
+.cw{display:flex;gap:6px;align-items:stretch}
+.cw .t{flex:1;width:auto}
+.del{flex:none;width:44px;margin-bottom:8px;border:0;border-radius:16px;background:#fff;color:var(--mut);font-size:18px;box-shadow:0 1px 3px rgba(15,42,61,.08)}
+.addb{width:100%;font:inherit;font-weight:700;color:var(--blue);background:var(--blue2);border:2px dashed var(--blue);border-radius:16px;padding:14px;margin-top:12px}
+.dlg input{width:100%;font:inherit;font-size:16px;padding:12px;border-radius:12px;border:1px solid var(--line);margin:8px 0 12px;color:var(--tx);background:#fff}
+.prio{display:flex;gap:6px;margin-bottom:14px}
+.prio button{flex:1;font:inherit;font-weight:700;font-size:15px;border:2px solid var(--line);background:#fff;color:var(--mut);border-radius:999px;padding:10px 4px}
+.prio button.on[data-p="0"]{border-color:var(--hi);color:var(--hi);background:var(--hibg)}
+.prio button.on[data-p="1"]{border-color:var(--blue);color:var(--blue);background:var(--blue2)}
+.prio button.on[data-p="2"]{border-color:#9fb0bd;color:var(--tx);background:var(--bg)}
+.i{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px;margin-right:6px;flex:none}
+.box .i{width:16px;height:16px;margin:0;stroke-width:3.2;vertical-align:0}
+.del .i{width:20px;height:20px;margin:0;vertical-align:-4px}
+.dlg .ic .i{width:48px;height:48px;margin:0;stroke:var(--blue);stroke-width:1.8}
+.lbl .i{width:13px;height:13px;margin-right:4px;vertical-align:-2px}
+.toast .i{stroke:#fff}
+.i.tr{width:2em;height:1.6em;fill:currentColor;stroke:none;margin-right:8px;vertical-align:-6px}
+.vracht b{display:flex;align-items:center}
+.vracht b .tr{color:var(--blue)}
+.toast{--cut:var(--hi);display:none;align-items:center}
+.toast.show{display:flex}
+.toast .tr{color:#fff;stroke:none}
 </style>
 </head>
 <body>
@@ -74,17 +97,18 @@ main{max-width:560px;margin:0 auto;padding:0 14px}
 </header>
 <main>
 <div class="vracht" id="vr">
-<b>🚚 Vracht</b>
+<b><svg class="i tr" viewBox="0 0 66 52" aria-hidden="true"><rect x="16" y="16" width="30" height="22" rx="2"/><path d="M46 22H55L63 31V40H46Z"/><rect x="16" y="36" width="47" height="6" rx="2"/><path style="fill:var(--cut,#fff);stroke:none" d="M50 25.5H54L59.5 31H50Z"/><circle style="fill:var(--cut,#fff);stroke:none" cx="27" cy="43" r="9.5"/><circle style="fill:var(--cut,#fff);stroke:none" cx="53" cy="43" r="9.5"/><circle cx="27" cy="43" r="6.5"/><circle cx="53" cy="43" r="6.5"/><circle style="fill:var(--cut,#fff);stroke:none" cx="27" cy="43" r="2.4"/><circle style="fill:var(--cut,#fff);stroke:none" cx="53" cy="43" r="2.4"/><circle style="fill:var(--cut,#fff);stroke:none" cx="16" cy="16" r="16"/><circle cx="16" cy="16" r="11" style="fill:var(--cut,#fff);stroke:currentColor;stroke-width:3.5"/><path d="M16 16V8.5A7.5 7.5 0 0 1 23.5 16Z" style="fill:currentColor;opacity:.5;stroke:none"/></svg>Vracht</b>
 <input type="time" id="vt" aria-label="Verwachte aankomst">
 <button id="vh">Vracht is er</button>
-<button class="bell" id="bell">🔔 Meldingen aan</button>
+<button class="bell" id="bell"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>Meldingen aan</button>
 <div class="vstat" id="vs"></div>
 <div class="vstat" id="ns"></div>
 </div>
 <div id="list"></div>
 <div class="foot"><button id="reset">Alles resetten</button></div>
 </main>
-<div class="ov" id="ov"><div class="dlg"><div class="ic">🏷️</div><h3>Retourlabel erop?</h3><p id="ovt">Zit het retourlabel op de kant waar de wielen draaien?</p><div class="row"><button class="nee" id="nee">Nee</button><button class="ja" id="ja">Ja</button></div></div></div>
+<div class="ov" id="ov"><div class="dlg"><div class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg></div><h3>Retourlabel erop?</h3><p id="ovt">Zit het retourlabel op de kant waar de wielen draaien?</p><div class="row"><button class="nee" id="nee">Nee</button><button class="ja" id="ja">Ja</button></div></div></div>
+<div class="ov" id="ov2"><div class="dlg"><h3>Eigen taak</h3><p id="ov2t"></p><input id="nt" type="text" maxlength="80" placeholder="Bijv. kratten sorteren" autocomplete="off"><div class="prio" id="pr"><button data-p="0">Hoog</button><button data-p="1" class="on">Normaal</button><button data-p="2">Laag</button></div><div class="row"><button class="nee" id="cn2">Annuleer</button><button class="ja" id="ad2">Toevoegen</button></div></div></div>
 <div class="toast" id="toast"></div>
 <script>
 // prio: 0 = hoog, 1 = normaal, 2 = laag
@@ -114,15 +138,18 @@ var P=[
 {n:"Als laatste",pill:"Laatste taak",t:[
 ["r9","Deur op slot en vegen","",2]]}]}
 ];
-var K="magazijn-v3",S={done:{},time:"",here:false,tab:0};
+var K="magazijn-v3",S={done:{},time:"",here:false,tab:0,custom:[]};
 try{var r=localStorage.getItem(K);if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
 function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+var IC_TAG='<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg>',IC_CHECK='<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',IC_X='<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',IC_TRUCK='<svg class="i tr" viewBox="0 0 66 52" aria-hidden="true"><rect x="16" y="16" width="30" height="22" rx="2"/><path d="M46 22H55L63 31V40H46Z"/><rect x="16" y="36" width="47" height="6" rx="2"/><path style="fill:var(--cut,#fff);stroke:none" d="M50 25.5H54L59.5 31H50Z"/><circle style="fill:var(--cut,#fff);stroke:none" cx="27" cy="43" r="9.5"/><circle style="fill:var(--cut,#fff);stroke:none" cx="53" cy="43" r="9.5"/><circle cx="27" cy="43" r="6.5"/><circle cx="53" cy="43" r="6.5"/><circle style="fill:var(--cut,#fff);stroke:none" cx="27" cy="43" r="2.4"/><circle style="fill:var(--cut,#fff);stroke:none" cx="53" cy="43" r="2.4"/><circle style="fill:var(--cut,#fff);stroke:none" cx="16" cy="16" r="16"/><circle cx="16" cy="16" r="11" style="fill:var(--cut,#fff);stroke:currentColor;stroke-width:3.5"/><path d="M16 16V8.5A7.5 7.5 0 0 1 23.5 16Z" style="fill:currentColor;opacity:.5;stroke:none"/></svg>';
+function esc(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 var total=0;P.forEach(function(p){p.g.forEach(function(g){total+=g.t.length})});
 function render(){
 var d=0,tabs="",h="";
 P.forEach(function(p,i){
 var pd=0,pt=0;
 p.g.forEach(function(g){g.t.forEach(function(t){pt++;if(S.done[t[0]])pd++})});
+(S.custom||[]).forEach(function(c){if(c.tab===i){pt++;if(S.done[c.id])pd++}});
 d+=pd;
 tabs+='<button data-tab="'+i+'" class="'+(S.tab===i?'on':'')+'">'+p.n+'<small>'+pd+'/'+pt+'</small></button>';
 });
@@ -132,19 +159,25 @@ h+='<div class="grp'+(g.hi?' hi':'')+'">'+g.n+'<span class="pill">'+g.pill+'</sp
 if(g.note)h+='<div class="note">'+g.note+'</div>';
 g.t.forEach(function(t){
 var on=S.done[t[0]],cl=t[3]===0?' hi':(t[3]===2?' lo':'');
-h+='<button class="t'+cl+(on?' done':'')+'" data-id="'+t[0]+'"><span class="box">'+(on?'✓':'')+'</span><span class="tx">'+t[1]+(t[2]?'<span class="sub">'+t[2]+'</span>':'')+(t[4]?'<span class="lbl">🏷️ Retourlabel</span>':'')+'</span></button>';
+h+='<button class="t'+cl+(on?' done':'')+'" data-id="'+t[0]+'"><span class="box">'+(on?IC_CHECK:'')+'</span><span class="tx">'+t[1]+(t[2]?'<span class="sub">'+t[2]+'</span>':'')+(t[4]?'<span class="lbl">'+IC_TAG+'Retourlabel</span>':'')+'</span></button>';
 });
 });
+var cs=(S.custom||[]).filter(function(c){return c.tab===S.tab}).sort(function(a,b){return a.prio-b.prio});
+if(cs.length){h+='<div class="grp">Eigen taken<span class="pill">Extra</span></div>';cs.forEach(function(c){var on=S.done[c.id],cl=c.prio===0?' hi':(c.prio===2?' lo':'');h+='<div class="cw"><button class="t'+cl+(on?' done':'')+'" data-id="'+c.id+'"><span class="box">'+(on?IC_CHECK:'')+'</span><span class="tx">'+esc(c.t)+'</span></button><button class="del" data-del="'+c.id+'" aria-label="Verwijder">'+IC_X+'</button></div>'})}
+h+='<button class="addb" id="addb">+ Eigen taak toevoegen</button>';
 document.getElementById('tabs').innerHTML=tabs;
 document.getElementById('list').innerHTML=h;
-document.getElementById('pb').style.width=(d/total*100)+'%';
-document.getElementById('cnt').textContent=d+' van '+total+' klaar';
+document.getElementById('pb').style.width=(d/(total+(S.custom||[]).length)*100)+'%';
+document.getElementById('cnt').textContent=d+' van '+(total+(S.custom||[]).length)+' klaar';
 }
 document.getElementById('tabs').addEventListener('click',function(e){
 var b=e.target.closest('button');if(!b)return;
 S.tab=+b.getAttribute('data-tab');save();render();window.scrollTo(0,0);
 });
 document.getElementById('list').addEventListener('click',function(e){
+var dl=e.target.closest('.del');
+if(dl){var did=dl.getAttribute('data-del');S.custom=S.custom.filter(function(c){return c.id!==did});delete S.done[did];save();render();return}
+if(e.target.closest('#addb')){openAdd();return}
 var b=e.target.closest('.t');if(!b)return;
 var id=b.getAttribute('data-id');
 if(S.done[id]){delete S.done[id];save();render();return}
@@ -152,7 +185,29 @@ var lab=false;P.forEach(function(p){p.g.forEach(function(g){g.t.forEach(function
 if(lab){pend=id;document.getElementById('ov').classList.add('show')}
 else{S.done[id]=1;save();render()}
 });
-var pend=null;
+var pend=null,np=1;
+function openAdd(){
+np=1;document.getElementById('nt').value='';
+Array.prototype.forEach.call(document.querySelectorAll('#pr button'),function(b){b.classList.toggle('on',b.getAttribute('data-p')==='1')});
+document.getElementById('ov2t').textContent='Komt bij: '+P[S.tab].n;
+document.getElementById('ov2').classList.add('show');
+setTimeout(function(){document.getElementById('nt').focus()},50);
+}
+document.getElementById('pr').addEventListener('click',function(e){
+var b=e.target.closest('button');if(!b)return;
+np=+b.getAttribute('data-p');
+Array.prototype.forEach.call(document.querySelectorAll('#pr button'),function(x){x.classList.toggle('on',x===b)});
+});
+document.getElementById('cn2').addEventListener('click',function(){document.getElementById('ov2').classList.remove('show')});
+function addTask(){
+var v=document.getElementById('nt').value.trim();
+if(!v)return;
+S.custom=S.custom||[];
+S.custom.push({id:'c'+Date.now(),t:v,tab:S.tab,prio:np});
+save();render();document.getElementById('ov2').classList.remove('show');
+}
+document.getElementById('ad2').addEventListener('click',addTask);
+document.getElementById('nt').addEventListener('keydown',function(e){if(e.key==='Enter')addTask()});
 function closeOv(){document.getElementById('ov').classList.remove('show');pend=null}
 document.getElementById('ja').addEventListener('click',function(){if(pend){S.done[pend]=1;save();render()}closeOv()});
 document.getElementById('nee').addEventListener('click',function(){closeOv();toast('Eerst het retourlabel erop, aan de kant waar de wielen draaien.')});
@@ -162,7 +217,7 @@ document.getElementById('toast').addEventListener('click',function(){this.classL
 function notify(m){
 try{if('Notification' in window&&Notification.permission==='granted')new Notification('Vracht',{body:m})}catch(e){}
 try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}
-toast('🚚 '+m,true);
+toast(m,true);document.getElementById('toast').innerHTML=IC_TRUCK+esc(m);
 }
 function perm(){
 var n=document.getElementById('ns'),b=document.getElementById('bell');
@@ -200,7 +255,7 @@ document.getElementById('vh').addEventListener('click',function(){
 S.here=!S.here;if(S.here)S.tab=1;save();render();vr();
 });
 document.getElementById('reset').addEventListener('click',function(){
-if(confirm('Alles resetten?')){S={done:{},time:"",here:false,tab:0};save();render();vr()}
+if(confirm('Alles resetten?')){S={done:{},time:"",here:false,tab:0,custom:[]};save();render();vr()}
 });
 render();vr();perm();setInterval(vr,30000);
 </script>
